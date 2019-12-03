@@ -10,12 +10,11 @@ import (
 )
 
 func main() {
-	var mass float64
 	var totFuel float64
 
 	const delim = '\n'
 
-	var file, err = os.Open("advent_of_code/day_1/input.txt")
+	file, err := os.Open("advent_of_code/day_1/input.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -26,13 +25,6 @@ func main() {
     }()
 
 	r := bufio.NewReader(file)
-
-	// fmt.Println("Enter a mass: ")
-	
-	// if err != nil {
-	// 	fmt.Println(err)
-	// 	os.Exit(1)
-	// }
 
 	totFuel = 0
 	for i:= 0; i < 100; i++{
@@ -45,7 +37,7 @@ func main() {
 		}
 		line = line[:len(line)-1]
 
-		mass, err = strconv.ParseFloat(line, 64)
+		mass, err := strconv.ParseFloat(line, 64)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)
