@@ -14,7 +14,7 @@ func main() {
 
 	const delim = '\n'
 
-	file, err := os.Open("advent_of_code/day_1/input.txt")
+	file, err := os.Open("advent_of_code/day1_part1/input.txt")
 	if err != nil {
 		panic(err)
 	}
