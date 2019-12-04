@@ -14,7 +14,7 @@ func main() {
 
 	const delim = '\n'
 
-	file, err := os.Open("advent_of_code/day_1/input.txt")
+	file, err := os.Open("github.com/ajnieset/advent_of_code/day_1/input.txt")
 	if err != nil {
 		panic(err)
 	}
@@ -39,16 +39,21 @@ func main() {
 
 		mass, err := strconv.ParseFloat(line, 64)
 		if err != nil {
-			fmt.Println(err)
-			os.Exit(1)
+			panic(err)
 		}
-		totFuel = totFuel + calculate_fuel(mass)
+		totFuel += calculate_fuel_recurse(mass)
 	}
 
-	fmt.Printf("Total Fuel needed: %g\n", totFuel)
+	fmt.Printf("Total Fuel needed for part 2: %g\n", totFuel)
 }
 
-func calculate_fuel(mass float64) float64 {
+func calculate_fuel_recurse(mass float64) float64 {
 
-	return math.Floor(mass / 3) - 2
+	recurse_mass := math.Floor(mass / 3) - 2
+	if(recurse_mass > 0){
+		recurse_mass += calculate_fuel_recurse(recurse_mass)
+		return recurse_mass
+	} else {
+		return 0
+	}
 }
