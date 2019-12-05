@@ -10,7 +10,7 @@ import (
 
 func main() {
 	const delim = ','
-	var vals = make([]int64, 1000)
+	var vals = make([]int64, 173)
 
 	file, err := os.Open("github.com/ajnieset/advent_of_code/day2_part1/input.txt")
 	if err != nil {
@@ -28,9 +28,11 @@ func main() {
 
 	fmt.Printf("Size of r: %d\n", r.Size())
 
-	for i := 0; i < 175; i++ {
+	for i := 0; i < 173; i++ {
 		opcodes, err := r.ReadString(delim)
-		opcodes = opcodes[:len(opcodes)-1]
+		if opcodes[:len(opcodes)-1] != ""{
+			opcodes = opcodes[:len(opcodes)-1]
+		}
 		if err != nil {
 			if err == io.EOF {
 				fmt.Printf("Value of I: %d\n", i)
@@ -46,10 +48,6 @@ func main() {
 			fmt.Println(err)
 			return
 		}
-	}
-
-	for _, j := range vals {
-		fmt.Printf("Value: %d\n", j)
 	}
 
 }
