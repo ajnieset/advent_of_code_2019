@@ -16,11 +16,13 @@ func main() {
 
 	file, err := os.Open("advent_of_code/day1_part1/input.txt")
 	if err != nil {
-		panic(err)
+		fmt.Println(err)
+		return
 	}
 	defer func() {
         if err := file.Close(); err != nil {
-            panic(err)
+			fmt.Println(err)
+			return
         }
     }()
 
@@ -33,18 +35,20 @@ func main() {
 			if err == io.EOF {
 				break
 			}
-			panic(err)
+			fmt.Println(err)
+			return
 		}
 		line = line[:len(line)-1]
 
 		mass, err := strconv.ParseFloat(line, 64)
 		if err != nil {
-			panic(err)
+			fmt.Println(err)
+			return
 		}
 		totFuel += calculate_fuel_recurse(mass)
 	}
 
-	fmt.Printf("Total Fuel needed for part 2: %g\n", totFuel)
+	fmt.Printf("Total Fuel needed for part 2: %f\n", totFuel)
 }
 
 func calculate_fuel_recurse(mass float64) float64 {
