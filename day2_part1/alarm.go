@@ -58,7 +58,7 @@ func main() {
 
 }
 
-func opcode_program(opcodes []int) int {
+func opcode_reader(opcodes []int) int {
 
 	pos := 0
 	for {
