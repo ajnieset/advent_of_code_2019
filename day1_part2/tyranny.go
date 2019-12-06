@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"math"
 	"bufio"
+	"fmt"
 	"io"
+	"math"
 	"os"
 	"strconv"
 )
@@ -20,16 +20,16 @@ func main() {
 		return
 	}
 	defer func() {
-        if err := file.Close(); err != nil {
+		if err := file.Close(); err != nil {
 			fmt.Println(err)
 			return
-        }
-    }()
+		}
+	}()
 
 	r := bufio.NewReader(file)
 
 	totFuel = 0
-	for i:= 0; i < 100; i++{
+	for i := 0; i < 100; i++ {
 		line, err := r.ReadString(delim)
 		if err != nil {
 			if err == io.EOF {
@@ -53,8 +53,8 @@ func main() {
 
 func calculate_fuel_recurse(mass float64) float64 {
 
-	recurse_mass := math.Floor(mass / 3) - 2
-	if(recurse_mass > 0){
+	recurse_mass := math.Floor(mass/3) - 2
+	if recurse_mass > 0 {
 		recurse_mass += calculate_fuel_recurse(recurse_mass)
 		return recurse_mass
 	} else {
