@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"os"
-	"io"
 	"bufio"
+	"fmt"
+	"io"
+	"os"
 	"strconv"
 )
 
@@ -18,17 +18,17 @@ func main() {
 		return
 	}
 	defer func() {
-        if err := file.Close(); err != nil {
+		if err := file.Close(); err != nil {
 			fmt.Println(err)
 			return
-        }
+		}
 	}()
-	
+
 	r := bufio.NewReader(file)
 
 	for {
 		input, err := r.ReadString(delim)
-		if input[:len(input)-1] != ""{
+		if input[:len(input)-1] != "" {
 			input = input[:len(input)-1]
 		}
 		if err != nil {

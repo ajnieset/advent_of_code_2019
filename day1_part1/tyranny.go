@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fmt"
-	"math"
 	"bufio"
+	"fmt"
 	"io"
+	"math"
 	"os"
 	"strconv"
 )
@@ -19,15 +19,15 @@ func main() {
 		panic(err)
 	}
 	defer func() {
-        if err := file.Close(); err != nil {
-            panic(err)
-        }
-    }()
+		if err := file.Close(); err != nil {
+			panic(err)
+		}
+	}()
 
 	r := bufio.NewReader(file)
 
 	totFuel = 0
-	for i:= 0; i < 100; i++{
+	for i := 0; i < 100; i++ {
 		line, err := r.ReadString(delim)
 		if err != nil {
 			if err == io.EOF {
@@ -49,5 +49,5 @@ func main() {
 
 func calculate_fuel(mass float64) float64 {
 
-	return math.Floor(mass / 3) - 2
+	return math.Floor(mass/3) - 2
 }
