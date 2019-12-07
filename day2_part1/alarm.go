@@ -1,60 +1,42 @@
 package main
 
 import (
-	"bufio"
+	"io/ioutil"
 	"fmt"
-	"io"
-	"os"
 	"strconv"
+	"strings"
 )
 
 func main() {
-	const delim = ','
-	var opcodes = make([]int, 0)
+	const delim = ","
+	//opcodes := []int{1,1,1,4,99,5,6,0,99}
 
-	file, err := os.Open("github.com/ajnieset/advent_of_code/day2_part1/input.txt")
+	file := "github.com/ajnieset/advent_of_code/day2_part1/input.txt"
+
+	input, err := ioutil.ReadFile(file)
 	if err != nil {
 		fmt.Println(err)
 		return
 	}
-	defer func() {
-		if err := file.Close(); err != nil {
-			fmt.Println(err)
-			return
-		}
-	}()
+	splits := strings.Split(string(input), delim)
 
-	r := bufio.NewReader(file)
+	opcodes := make([]int, 0, len(splits))
 
-	for {
-		input, err := r.ReadString(delim)
-		if input[:len(input)-1] != "" {
-			input = input[:len(input)-1]
-		}
-		if err != nil {
-			if err == io.EOF {
-				opcode, err := strconv.Atoi(input)
-				if err != nil {
-					fmt.Println(err)
-					return
-				}
-				opcodes = append(opcodes, opcode)
-				break
-			}
-			fmt.Println(err)
-			return
-		}
-
-		opcode, err := strconv.Atoi(input)
+	for _, i := range splits{
+		opcode, err := strconv.Atoi(i)
 		if err != nil {
 			fmt.Println(err)
 			return
 		}
 		opcodes = append(opcodes, opcode)
 	}
-	fmt.Printf("Last Number: %d\n", opcodes[len(opcodes)-1])
-	fmt.Printf("Second to Last Number: %d\n", opcodes[len(opcodes)-2])
-	fmt.Printf("Size of slice: %d\n", len(opcodes))
+
+	opcodes[1] = 12
+	opcodes[2] = 2
+	
+	final_code := opcode_reader(opcodes)
+
+	fmt.Printf("Opcode at Pos 0: %v\n", final_code)
 
 }
 
@@ -62,16 +44,14 @@ func opcode_reader(opcodes []int) int {
 
 	pos := 0
 	for {
-		if opcodes[pos] == 1 {
-			val1 := opcodes[opcodes[pos+1]]
-			val2 := opcodes[opcodes[pos+2]]
-
-			result := val1 + val2
-
-			opcodes[opcodes[pos+3]] = result
-		} else if opcodes[pos] == 99 {
+		if opcodes[pos] == 99 {
 			break
+		} else if opcodes[pos] == 1 {
+			opcodes[opcodes[pos+3]] = opcodes[opcodes[pos+1]] + opcodes[opcodes[pos+2]]
+		} else if opcodes[pos] == 2 {
+			opcodes[opcodes[pos+3]] = opcodes[opcodes[pos+1]] * opcodes[opcodes[pos+2]]
 		}
+		pos += 4
 	}
 
 	return opcodes[0]
