@@ -1,8 +1,8 @@
 package main
 
 import (
-	"io/ioutil"
 	"fmt"
+	"io/ioutil"
 	"strconv"
 	"strings"
 )
@@ -22,7 +22,7 @@ func main() {
 
 	opcodes := make([]int, 0, len(splits))
 
-	for _, i := range splits{
+	for _, i := range splits {
 		opcode, err := strconv.Atoi(i)
 		if err != nil {
 			fmt.Println(err)
@@ -33,7 +33,7 @@ func main() {
 
 	opcodes[1] = 12
 	opcodes[2] = 2
-	
+
 	final_code := opcode_reader(opcodes)
 
 	fmt.Printf("Opcode at Pos 0: %v\n", final_code)
