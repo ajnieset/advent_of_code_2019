@@ -9,7 +9,6 @@ import (
 
 func main() {
 	const delim = ","
-	//opcodes := []int{1,1,1,4,99,5,6,0,99}
 
 	file := "github.com/ajnieset/advent_of_code/day2_part1/input.txt"
 
