@@ -23,25 +23,19 @@ func main() {
 	opcodes := create_opcodes(splits)
 
 	var final_code int
-	for j:=0; j < 100; j++ {
-		opcodes[1] = j
-		for k:=0; k < 100; k++ {
+	for j := 0; j < 100; j++ {
+		for k := 0; k < 100; k++ {
+			opcodes[1] = j
 			opcodes[2] = k
-
 			final_code = opcode_reader(opcodes)
-			//fmt.Println(final_code)
 			if final_code == final_solution {
-				fmt.Println("solution found")
 				break
 			} else {
 				opcodes = create_opcodes(splits)
 			}
 		}
 		if final_code == final_solution {
-			fmt.Println("solution found")
 			break
-		} else {
-			opcodes = create_opcodes(splits)
 		}
 	}
 
@@ -50,7 +44,7 @@ func main() {
 	if final_code == final_solution {
 		fmt.Printf("Opcode at Pos 1: %v\n", opcodes[1])
 		fmt.Printf("Opcode at Pos 2: %v\n", opcodes[2])
-		fmt.Printf("Opcode at Pos 2: %v\n", 100 * opcodes[1] + opcodes[2])
+		fmt.Printf("100 times noun plus verb: %v\n", 100*opcodes[1]+opcodes[2])
 	} else {
 		fmt.Println("Solution not found probably and error")
 	}
