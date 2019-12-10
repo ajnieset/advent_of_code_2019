@@ -11,7 +11,7 @@ func main() {
 	const delim = ","
 	const final_solution = 19690720
 
-	file := "github.com/ajnieset/advent_of_code/day2_part2/input.txt"
+	file := "/home/ajnieset/go/src/github.com/ajnieset/advent_of_code/day2_part2/input.txt"
 
 	input, err := ioutil.ReadFile(file)
 	if err != nil {
@@ -38,8 +38,6 @@ func main() {
 			break
 		}
 	}
-
-	//final_code := opcode_reader(opcodes)
 
 	if final_code == final_solution {
 		fmt.Printf("Opcode at Pos 1: %v\n", opcodes[1])
